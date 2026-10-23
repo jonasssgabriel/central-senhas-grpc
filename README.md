@@ -1,4 +1,4 @@
-<div align="center">
+﻿<div align="center">
 
 # Central de Senhas · gRPC
 
@@ -197,7 +197,7 @@ Os testes 1 a 5 foram rodados contra a Central real (processo Java em segundo pl
 
 ## Apresentação
 
-A aula de 30 a 40 minutos que o grupo usa para apresentar este trabalho (roteiro, diagramas, código passo a passo, demonstração ao vivo) está publicada em **[claude.ai/artifact/G3X7MWp4WJuCdLnLxR4MRS](https://claude.ai/artifact/G3X7MWp4WJuCdLnLxR4MRS)**.
+A aula de 30 a 40 minutos que o grupo usa para apresentar este trabalho (roteiro, diagramas, código passo a passo, demonstração ao vivo) está publicada em **[claude.ai/artifact/U44J9tGNVieoUzD1iyJHP1](https://claude.ai/artifact/U44J9tGNVieoUzD1iyJHP1)**.
 
 ## Estrutura do repositório
 
