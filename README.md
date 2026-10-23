@@ -1,4 +1,4 @@
-﻿<div align="center">
+<div align="center">
 
 # Central de Senhas · gRPC
 
@@ -187,13 +187,15 @@ Do lado do [`TelaTotem`](ClienteAtendimentoRPC/src/main/java/com/mycompany/clien
 | 4 | Prazo curtíssimo (50&nbsp;ms) | `DEADLINE_EXCEEDED` | ✅ |
 | 5 | `isCancelled()` detecta a desistência | Central para, sem numerar | ✅ log: `Totem desistiu (Carla); atendimento interrompido antes de numerar.` |
 | 6 | Central desligada | `UNAVAILABLE` | ✅ (pare a Central e peça uma senha) |
-| 7 | Repetir o pedido após o prazo | Duas senhas diferentes | ✅ — a chamada não é idempotente (ver abaixo) |
+| 7 | Repetir o pedido após o prazo | Nova senha, sem duplicar | ✅ Carla recebeu `N-003` uma única vez: a tentativa cancelada pelo `isCancelled()` não gastou número (ver abaixo) |
 
-Os testes 1 a 5 foram rodados contra a Central real (processo Java em segundo plano, chamadas gRPC de verdade, sem mock).
+Os testes 1 a 7 foram rodados contra a Central real (processo Java em segundo plano, chamadas gRPC de verdade, sem mock).
 
 ### Por que repetir pode custar duas senhas
 
-`PegarSenha` não é idempotente. Se o totem reenvia o mesmo pedido depois de um `DEADLINE_EXCEEDED`, a Central não tem como saber que a tentativa anterior quase terminou — ela numera de novo. É o preço de um protocolo simples: evitar isso exigiria um identificador de pedido e um cache de respostas, fora do escopo deste trabalho.
+`PegarSenha` não é idempotente. Se o totem reenvia o mesmo pedido depois de um `DEADLINE_EXCEEDED`, a Central não tem como saber se a tentativa anterior chegou ao fim. Uma senha extra aparece quando a Central **já numerou** e o totem desiste antes de receber a resposta (resposta atrasada ou perdida): ao repetir, ela numera de novo.
+
+No projeto, a verificação de `Context.current().isCancelled()` acontece **antes** de numerar. Por isso, quando o prazo estoura durante o atendimento simulado, a Central para sem numerar e a repetição gera uma única senha (teste 7). Evitar a senha extra no caso geral exigiria um identificador de pedido e um cache de respostas, fora do escopo deste trabalho.
 
 ## Apresentação
 
