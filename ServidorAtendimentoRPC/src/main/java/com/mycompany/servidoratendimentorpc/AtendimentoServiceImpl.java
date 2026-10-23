@@ -37,8 +37,10 @@ public class AtendimentoServiceImpl
 
     @Override
     public void pegarSenha(PedidoSenha req, StreamObserver<Senha> observador) {
+        // ===== Jonas explica este trecho na apresentação (validação do nome) =====
         // Trabalho 5 — validação: nome vazio é recusado antes de qualquer processamento
         if (req.getNome() == null || req.getNome().trim().isEmpty()) {
+            // ===== Lucas explica a partir daqui (o erro de validação) =====
             // Trabalho 5: null acontece só em teoria (protobuf nunca devolve null em string),
             // mas trim().isEmpty() cobre nome vazio ou só com espaços
             observador.onError(Status.INVALID_ARGUMENT
@@ -49,6 +51,7 @@ public class AtendimentoServiceImpl
             return; // Trabalho 5: sai sem numerar, sem onCompleted — a chamada já terminou no onError
         }
 
+        // ===== Lucas explica este trecho também (deadline e cancelamento) =====
         // Trabalho 5 — deadline/cancelamento: só numera se o totem ainda estiver esperando
         if (!atenderComVerificacaoDeCancelamento(req)) {
             // Trabalho 5: o totem já desistiu (prazo esgotado ou chamada cancelada):

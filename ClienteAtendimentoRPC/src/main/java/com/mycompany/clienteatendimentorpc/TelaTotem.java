@@ -23,6 +23,7 @@ public class TelaTotem extends javax.swing.JFrame {
     // Trabalho 5 (Jonas, Lucas e Luis): prazo que o totem dá para a Central
     // responder. Reduza este valor (ou aumente o atendimento simulado em
     // AtendimentoServiceImpl) para reproduzir DEADLINE_EXCEEDED no teste.
+    // ===== Luis explica esta constante (o prazo que o totem espera) =====
     private static final long PRAZO_SEGUNDOS = 5; // Trabalho 5: era um "5" fixo dentro do método; virou constante nomeada
 
     private final ManagedChannel canal;
@@ -270,6 +271,7 @@ public class TelaTotem extends javax.swing.JFrame {
         PedidoSenha pedido = PedidoSenha.newBuilder()
                 .setNome(nome).setTipo(tipo).setLocal(local).build();
 
+        // ===== Luis explica este trecho na apresentação (o totem e o prazo) =====
         btnPegarSenha.setEnabled(false);               // Trabalho 5: trava o botão pra não clicar 2x enquanto espera
         lblMensagem.setText("Aguardando a Central...");  // Trabalho 5: feedback imediato pro usuário, antes da resposta
 
@@ -293,6 +295,7 @@ public class TelaTotem extends javax.swing.JFrame {
         // Nada a fazer aqui: o local só é lido na hora de pegar a senha.
     }//GEN-LAST:event_cbxLocalActionPerformed
 
+    // ===== Luis explica este método (mensagem por código de erro) =====
     /**
      * Trabalho 5 (Jonas, Lucas e Luis) — cada código de status do gRPC é
      * causado por um lado diferente da chamada:
