@@ -53,6 +53,11 @@ git clone https://github.com/jonasssgabriel/central-senhas-grpc.git
 cd central-senhas-grpc
 ```
 
+> [!NOTE]
+> Este repositório já tem o Trabalho 5 completo. Para acompanhar a oficina
+> partindo do zero (o mesmo ponto de partida que os colegas usam), veja o
+> projeto básico em **[central-senhas-grpc-base](https://github.com/jonasssgabriel/central-senhas-grpc-base)**.
+
 No NetBeans: `File › Open Project…` nos dois projetos, `Clean and Build` em cada um (primeira vez baixa as dependências, leva 1 a 2 minutos), depois `Run` no `ServidorAtendimentoRPC` e `Run` no `ClienteAtendimentoRPC` — pode abrir o cliente várias vezes para simular vários totens.
 
 Sem o NetBeans, pela linha de comando (precisa de internet na primeira vez, para o Maven resolver o `exec-maven-plugin`):
